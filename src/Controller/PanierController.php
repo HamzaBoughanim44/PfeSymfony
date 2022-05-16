@@ -24,6 +24,7 @@ class PanierController extends AbstractController
     {
         $panier = $session->get('panier' , []);
         $panierWithData = [];
+        $quantityPanier =0;
         foreach($panier as $id => $quantity){
 
             $panierWithData[] = [
@@ -31,12 +32,14 @@ class PanierController extends AbstractController
                 'quantity' => $quantity
 
             ];
+
         }
         $total = 0;
         foreach($panierWithData as $item ){
     
             $totalItem = $item['product']->getPrice() * $item['quantity'];
             $total += $totalItem;
+            $quantityPanier +=$quantity;
 
         }
         $category = $categoryRepository->findAll();
@@ -45,7 +48,12 @@ class PanierController extends AbstractController
         return $this->render('panier/panier.html.twig', [
             'items' => $panierWithData,
             'total' => $total,
-            'categorys' => $category
+            'categorys' => $category,
+            "quantityPanier" =>$quantityPanier,
+            "taxe"=>round($total*0.2),
+            "subTotalTTC" =>round(($total + ($total*0.2))),
+            'categorys' => $category,
+           
 
         ]);
     }
@@ -103,5 +111,13 @@ class PanierController extends AbstractController
           $session->set('panier', $panier); 
           $flashyNotifier->success('Votre produit a été delete');    
        return $this->redirectToRoute("app_panier");
+    }
+    public function getPanier(){
+        return $this->session->get('panier' , []);
+    }
+
+    public function getFullPanier(){
+        $panier = $this->getPanier();
+        $total=0;
     }
 }
