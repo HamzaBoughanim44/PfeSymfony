@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{path('app_store')}}">
+     <img src="images/geminitwins4.png" height="60"    >
+    
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+           {% for category in categorys %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{path('app_category',{'slug': category.slug})}}">{{category.nomecate}}</a>
+            </li>
+            {% endfor %}
+
+             <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{path('app_contact')}}">Contact Us</a>
+            </li>
+           {% if is_granted('ROLE_ADMIN') %}
+             <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{path('admin')}}">Admin</a>
+            </li>
+            {% endif %}
+
+           
+        
+      </ul>
+    
+    </div>
+     <form class="d-flex">
+             <a  href="{{path('app_panier')}}" class="btn btn-outline-dark">
+                       
+                <i class="fas fa-shopping-cart"></i>
+             </a>
+      </form>
+     <ul class="navbar-nav  mb-2 mb-lg-0 me-right" >
+          {% if app.user %}
+            <!-- <li class="nav-item">
+               <a class="nav-link active" href="#"> {{app.user.username}} </a>
+               </li>-->
+             <div>
+               <li class="nav-item">
+               <a class="nav-link active" aria-current="page" href="/{{app.user ? 'logout'}}">
+               <div class="d-flex align-items-center">
+               <button type="button" class="btn btn-primary me-3">{{app.user ? 'Logout'}}</button> </div>
+               </a>
+               </li>
+             </div>
+               
+ 
+            {% else %}
+
+               <div class="d-flex align-items-center">
+               <a class="nav-link active" aria-current="page" href="{{path('app_login')}}">
+               <button type="button" class="btn btn-primary me-3">connexion </button></a>
+               </div>
+           {% endif %}
+           </ul>
+  </div>
+  
+</nav>
+

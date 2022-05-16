@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{user.username}}{% endblock %}
+
+{% block body %}
+
+  <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+    <div class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="https://media.istockphoto.com/photos/courier-picture-id1321175250?k=20&m=1321175250&s=612x612&w=0&h=e-8TzQnm_VRWJ0Z5YQpB9y87JYz5M4a4PrWZvYWQPcg=" height="100" width="100" /></button> <span class="name mt-3">{{user.username}}</span> <span class="idd">@{{user.username}}</span>
+           <!-- <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>-->
+            <div class="d-flex flex-row justify-content-center align-items-center mt-3"></div>
+            <div class=" d-flex mt-2">
+              <a class="nav-link active" aria-current="page" href="{{path('admin')}}">
+             <button class="btn1 btn-dark">Dashboard Admin</button>
+               </a> 
+              </div>
+            <div class="text mt-3"> 
+            <span>Vous pouvez travailler ici sur le site à condition que vous m'envoyiez un message indiquant que vous souhaitez travailler 
+             <a class="nav-link active" aria-current="page" href="{{path('app_contact')}}">ici .</a> 
+             <br><br> afin que je puisse vous promouvoir en tant qu'administrateur sur le site 
+             </span>
+              </div>
+            <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2022</span> </div>
+        </div>
+    </div>
+</div>
+
+  
+{% endblock %}

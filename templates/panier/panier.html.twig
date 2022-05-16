@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+  <section class="h-100" style="background-color: #eee;">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+          <div>
+            <p class="mb-0">  <h3 class="fw-normal mb-0 text-black"> <span class="text-muted">Total :</span> {{ (total)/100 }} MAD </h3></p>
+          </div>
+        </div>
+        
+        
+      {% for item in items %}
+        <div class="card rounded-3 mb-4">
+          <div class="card-body p-4">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                <img
+                  src="{{ asset('/images/'~item.product.image)}}"
+                  class="img-fluid rounded-3" alt="Cotton T-shirt">
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <p class="lead fw-normal mb-2">{{item.product.nomep}}</p>
+              </div>
+             
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                <h5 class="mb-0">{{(item.product.price)/100}} DH</h5>
+            
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 ">
+               <h5> {{(item.product.price * item.quantity)/100}} DH</h5>
+              </div>
+              
+               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                <a href="{{path('app_add', {'id': item.product.id})}}" class="btn btn-link px-2" class="py-1">
+                     <i class="fas fa-plus"></i>
+                </a>
+                 <a href="{{path('app_delete', {'id': item.product.id})}}" class="btn btn-link px-2" class="py-1">
+                     <i class="fas fa-minus"></i>
+                </a>
+
+              </div>
+              
+              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                <a href="{{path('app_remove', {'id': item.product.id})}}" class="text-danger">
+                  <i class="fas fa-trash fa-lg"></i>
+                </a>
+            
+              </div>
+
+             
+              
+              
+            </div>
+          </div>
+        </div>
+ {% endfor %}
+
+      </div>
+
+          <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Summary</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                {% for item in items %}
+                <span>{{item.quantity}}</span>
+                {% endfor %}
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span>Gratis</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <strong>
+                    <p class="mb-0">(including VAT)</p>
+                  </strong>
+                </div>
+                <span><strong> {{ (total)/100 }} MAD</strong></span>
+              </li>
+            </ul>
+
+            <a href="{{path('app_checkout')}}" class="btn btn-primary btn-lg btn-block">
+              Go to checkout
+            </a>
+          </div>
+        </div>
+      </div>
+       
+
+        <div class="pt-5">
+            <h6 class="mb-0"><a href="{{path('app_store')}}" class="text-body">
+            <i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+         </div>
+    </div>
+  </div>
+</section>
+<div class="card mb-4 mb-lg-0" style="background-color: #eee;">
+          <div class="card-body">
+            <p><strong>We accept</strong></p>
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+              alt="Visa" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+              alt="American Express" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+              alt="Mastercard" />
+
+             <a href="#!" type="submit" ><i class="fab fa-cc-paypal fa-2x"></i></a>  
+            
+          </div>
+        </div>
+ 
+
+
+{% endblock %}
